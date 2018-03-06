@@ -1,6 +1,6 @@
-var pg = require('../pg')
+const pg = require('../pg')
 
-var getConString = constr => `postgres://${constr.user}:${constr.pw}@${constr.host}:${constr.port}/${constr.dbname}`
+let getConString = constr => `postgres://${constr.user}:${constr.pw}@${constr.host}:${constr.port}/${constr.dbname}`
 
 exports.get_rows = (constr, sql, callback) => {
 	pg.connect(getConString(constr), (err, client, done) => {
@@ -37,7 +37,7 @@ exports.excute = (constr, sql, callback) => {
 	})
 }
 
-var pgExcute = (constr, sql, callback) => {
+let pgExcute = (constr, sql, callback) => {
 	pg.connect(getConString(constr), (err, client, done) => {
 		if (err) {
 			console.log(`${new Date().toDateString()} — Can not connect Code: ${err.code}, Message: ${err.message}`)
@@ -58,4 +58,4 @@ var pgExcute = (constr, sql, callback) => {
 	})
 }
 
-var errLog = (err, sql, method) => console.error(`${new Date().toDateString()} — Error ${method} running query, ${err}\r\n${sql}`)
+let errLog = (err, sql, method) => console.error(`${new Date().toDateString()} — Error ${method} running query, ${err}\r\n${sql}`)
